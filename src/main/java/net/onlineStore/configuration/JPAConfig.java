@@ -50,7 +50,7 @@ public class JPAConfig {
         entityManagerFactory.setDataSource(dataSource());
         entityManagerFactory.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactory.setPackagesToScan("web.resume.entities");
+        entityManagerFactory.setPackagesToScan("net.onlineStore.entities");
         entityManagerFactory.setJpaProperties(hibernateProperties());
         return entityManagerFactory;
     }

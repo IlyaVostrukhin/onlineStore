@@ -1,5 +1,6 @@
 package net.onlineStore.configuration;
 
+import net.onlineStore.filters.CategoryProducerFilter;
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
 import org.springframework.web.WebApplicationInitializer;
@@ -37,6 +38,7 @@ public class StoreWebApplicationInitializer implements WebApplicationInitializer
 
     private void registerFilters(ServletContext container, WebApplicationContext ctx) {
         registerFilter(container, ctx.getBean(StoreFilter.class));
+        registerFilter(container, ctx.getBean(CategoryProducerFilter.class));
         registerFilter(container, new CharacterEncodingFilter("UTF-8", true));
         registerFilter(container, buildConfigurableSiteMeshFilter(), "sitemesh");
     }

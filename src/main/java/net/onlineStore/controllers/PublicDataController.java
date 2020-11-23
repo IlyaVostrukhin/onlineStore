@@ -1,7 +1,10 @@
 package net.onlineStore.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import net.onlineStore.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -9,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class PublicDataController {
 
+    @Autowired
+    private ProductService productService;
+
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public String getAllProducts() {
-        log.error("App call getAllProducts method");
+    public String getAllProducts(Model model) {
+        model.addAttribute("products", productService.findAllProducts());
+        model.addAttribute("products", productService.findAllProducts());
+        model.addAttribute("products", productService.findAllProducts());
         return "products";
     }
 
