@@ -1,9 +1,6 @@
 package net.onlineStore.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -27,11 +24,13 @@ public class Product extends AbstractEntity<Long> {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(name = "id_category")
-    private String category;
+    @OneToOne
+    @JoinColumn (name="id_category")
+    private Category category;
 
-    @Column(name = "id_producer")
-    private String producer;
+    @OneToOne
+    @JoinColumn (name="id_producer")
+    private Producer producer;
 
     @Override
     public Long getId() {
@@ -74,19 +73,19 @@ public class Product extends AbstractEntity<Long> {
         this.price = price;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-    public String getProducer() {
+    public Producer getProducer() {
         return producer;
     }
 
-    public void setProducer(String producer) {
+    public void setProducer(Producer producer) {
         this.producer = producer;
     }
 }

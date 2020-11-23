@@ -32,9 +32,6 @@
             </section>
         </main>
     </div>
-    <section class="main">
-        <sitemesh:write property='body'/>
-    </section>
 </div>
 <footer class="footer">
     <jsp:include page="fragment/footer.jsp"/>

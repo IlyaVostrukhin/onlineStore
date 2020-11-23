@@ -23,9 +23,9 @@
                 <a class="btn btn-primary pull-right buy-btn" data-id-product="${p.id }">Купить</a>
                 <div class="list-group">
                     <span class="list-group-item"> <small>Категория:</small> <span
-                            class="category">${p.category }</span></span>
+                            class="category">${p.category.name }</span></span>
                     <span class="list-group-item"> <small>Производитель:</small> <span
-                            class="producer">${p.producer }</span></span>
+                            class="producer">${p.producer.name }</span></span>
                 </div>
             </div>
         </div>
