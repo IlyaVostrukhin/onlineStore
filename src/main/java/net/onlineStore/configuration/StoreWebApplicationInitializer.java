@@ -60,7 +60,9 @@ public class StoreWebApplicationInitializer implements WebApplicationInitializer
         return new ConfigurableSiteMeshFilter() {
             @Override
             protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
-                builder.addDecoratorPath("/*", "/WEB-INF/JSP/page-template.jsp");
+                builder
+                        .addDecoratorPath("/*", "/WEB-INF/JSP/page-template.jsp")
+                        .addDecoratorPath("/ajax/*", "/WEB-INF/JSP/fragment-template.jsp");
             }
         };
     }

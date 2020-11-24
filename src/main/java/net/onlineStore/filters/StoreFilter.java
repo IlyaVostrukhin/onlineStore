@@ -30,13 +30,19 @@ public class StoreFilter extends AbstractFilter {
 
     private void handleException(Throwable throwable, String requestUrl, HttpServletResponse response) throws ServletException, IOException {
         if (isProduction) {
-            if ("/error".equals(requestUrl)) {
-                throw new ServletException(throwable);
+            if (requestUrl.startsWith("/ajax") || "/error".equals(requestUrl)) {
+                sendErrorStatus(response);
             } else {
                 response.sendRedirect("/error?url=" + requestUrl);
             }
         } else {
             throw new ServletException(throwable);
         }
+    }
+
+    private void sendErrorStatus(HttpServletResponse response) throws IOException {
+        response.reset();
+        response.getWriter().write("");
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
 }
