@@ -233,7 +233,7 @@ var store = {
         if (page >= total) {
             return;
         }
-        var url = '/ajax/html/more/products?page=' + page;
+        var url = '/ajax/html/more/' + location.pathname + '?page=' + page + '&' + location.search.substring(1);
         if(searchQuery != undefined && searchQuery.trim() != '') {
             url += '&query='+searchQuery;
         }

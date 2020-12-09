@@ -12,6 +12,8 @@ public interface ProductService {
 
     Page<Product> findAllProducts(Pageable pageable);
 
+    Page<Product> findAllByCategory(Category category, Pageable pageable);
+
     List<Producer> findAllProducers();
 
     List<Category> findAllCategories();
