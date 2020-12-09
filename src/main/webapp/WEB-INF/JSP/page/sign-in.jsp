@@ -2,7 +2,6 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="u" uri="/WEB-INF/tags.tld" %>
 
 <div class="form-group">
     <h4 align="center"><b>Рады приветствовать Вас в нашем магазине!</b></h4>

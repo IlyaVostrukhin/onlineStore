@@ -31,7 +31,6 @@
 </form>
 <!-- /Search form -->
 <!-- Categories -->
-<%--<div id="productCatalog" class="panel panel-success collapse">--%>
 <div id="productCatalog" class="panel panel-primary collapse">
     <div class="panel-heading">Категории товаров</div>
     <div class="list-group">

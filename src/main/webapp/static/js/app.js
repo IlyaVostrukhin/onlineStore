@@ -102,31 +102,6 @@
         btn.click(actionClick);
     };
 
-    var loadMoreProducts = function (){
-        var btn = $('#loadMore');
-        convertButtonToLoader(btn, 'btn-success');
-        var pageNumber = parseInt($('#productList').attr('data-page-number'));
-        var url = '/ajax/html/more' + location.pathname + '?page=' + (pageNumber + 1) + '&' + location.search.substring(1);
-        $.ajax({
-            url : url,
-            success : function(html) {
-                $('#productList .row').append(html);
-                pageNumber++;
-                var pageCount = parseInt($('#productList').attr('data-page-count'));
-                $('#productList').attr('data-page-number', pageNumber);
-                if(pageNumber < pageCount) {
-                    convertLoaderToButton(btn, 'btn-success', loadMoreProducts);
-                } else {
-                    btn.remove();
-                }
-                initBuyBtn();
-            },
-            error : function(data) {
-                convertLoaderToButton(btn, 'btn-success', loadMoreProducts);
-                alert('Error');
-            }
-        });
-    };
     var initSearchForm = function (){
         $('#allCategories').click(function(){
             $('.categories .search-option').prop('checked', $(this).is(':checked'));
@@ -250,6 +225,40 @@
 
     init();
 });
+
+var store = {
+    moreProducts : function(searchQuery) {
+        var page = parseInt($('#productContainer').attr('data-page-number')) + 1;
+        var total= parseInt($('#productContainer').attr('data-page-count'));
+        if (page >= total) {
+            return;
+        }
+        var url = '/ajax/html/more/' + location.pathname + '?page=' + page + '&' + location.search.substring(1);
+        if(searchQuery != undefined && searchQuery.trim() != '') {
+            url += '&query='+searchQuery;
+        }
+
+        $('#loadMoreContainer').css('display', 'none');
+        $('#loadMoreIndicator').css('display', 'block');
+        $.ajax({
+            url : url,
+            success : function(data) {
+                $('#loadMoreIndicator').css('display', 'none');
+                $('#productContainer').append(data);
+                $('#productContainer').attr('data-page-number', page);
+                if (page >= total-1) {
+                    $('#loadMoreIndicator').remove();
+                    $('#loadMoreContainer').remove();
+                } else {
+                    $('#loadMoreContainer').css('display', 'block');
+                }
+            },
+            error : function(data) {
+                alert("error");
+            }
+        });
+    }
+};
 
 $(document).ready(function() {
     $("#phone").mask("+7-999-999-99-99");

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <fmt:requestEncoding value="utf-8"/>
 <html>
-<%--<html lang="ru">--%>
+<html lang="ru">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -27,7 +27,9 @@
             <jsp:include page="fragment/aside.jsp"/>
         </aside>
         <main class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-            <jsp:include page="${currentPage}"/>
+            <section class="main">
+                <sitemesh:write property='body'/>
+            </section>
         </main>
     </div>
 </div>
