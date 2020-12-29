@@ -2,25 +2,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="alert alert-info">
-    <p>Найдено <strong>${productCount}</strong> <%
+    <p><%
         int productCount = (Integer) request.getAttribute("productCount");
         int preLastDigit = productCount % 100 / 10;
 
         if (preLastDigit == 1) {
-            out.print("товаров");
+            out.print("Найдено <strong>" + productCount + "</strong>  товаров");
         }
 
         switch (productCount % 10) {
             case 1:
-                out.print("товар");
+                out.print("Найден <strong>" + productCount + "</strong>  товар");
                 break;
             case 2:
             case 3:
             case 4:
-                out.print("товара");
+                out.print("Найдено <strong>" + productCount + "</strong>  товара");
                 break;
             default:
-                out.print("товаров");
+                out.print("Найдено <strong>" + productCount + "</strong>  товаров");
                 break;
         }
     %>
