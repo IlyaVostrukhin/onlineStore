@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,11 +57,15 @@ class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Producer> findAllProducers() {
-        return producerRepository.findAll();
+        List<Producer> producers = producerRepository.findAll();
+        producers.sort(Comparator.comparing(Producer::getName));
+        return producers;
     }
 
     @Override
     public List<Category> findAllCategories() {
-        return categoryRepository.findAll();
+        List<Category> categories = categoryRepository.findAll();
+        categories.sort(Comparator.comparing(Category::getName));
+        return categories;
     }
 }
