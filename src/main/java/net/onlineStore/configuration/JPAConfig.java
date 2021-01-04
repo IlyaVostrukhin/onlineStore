@@ -2,7 +2,6 @@ package net.onlineStore.configuration;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -22,8 +21,11 @@ import java.util.Properties;
 @EnableJpaRepositories("net.onlineStore.repositories")
 public class JPAConfig {
 
-    @Autowired
-    private Environment environment;
+    private final Environment environment;
+
+    public JPAConfig(Environment environment) {
+        this.environment = environment;
+    }
 
     @Bean()
     public DataSource dataSource() {

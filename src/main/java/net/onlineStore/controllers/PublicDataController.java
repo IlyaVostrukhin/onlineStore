@@ -6,7 +6,6 @@ import net.onlineStore.entities.Product;
 import net.onlineStore.form.SearchForm;
 import net.onlineStore.services.CategoryService;
 import net.onlineStore.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -22,11 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PublicDataController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
+
+    public PublicDataController(ProductService productService, CategoryService categoryService) {
+        this.productService = productService;
+        this.categoryService = categoryService;
+    }
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String getAllProducts(

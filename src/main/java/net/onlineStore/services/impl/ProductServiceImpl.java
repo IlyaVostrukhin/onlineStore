@@ -8,7 +8,7 @@ import net.onlineStore.repositories.CategoryRepository;
 import net.onlineStore.repositories.ProducerRepository;
 import net.onlineStore.repositories.ProductRepository;
 import net.onlineStore.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,14 +20,17 @@ import java.util.stream.Collectors;
 @Service
 class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    @Autowired
-    private ProducerRepository producerRepository;
+    private final ProducerRepository producerRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository, ProducerRepository producerRepository, CategoryRepository categoryRepository) {
+        this.productRepository = productRepository;
+        this.producerRepository = producerRepository;
+        this.categoryRepository = categoryRepository;
+    }
 
     @Override
     public Page<Product> findAllProducts(Pageable pageable) {
