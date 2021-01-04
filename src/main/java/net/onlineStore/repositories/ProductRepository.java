@@ -27,4 +27,6 @@ Page<Product> findAllBySearchForm(@Param("query") String queryParams,
                                   @Param("producers") List<Integer> producerIds,
                                   Pageable pageable);
 
+//ToDo: после добавления нового продукта инкрементировать количество продуктов в таблице Category
+//ToDo: после удаления существующего продукта декрементировать количество продуктов в таблице Category
 }
