@@ -1,7 +1,6 @@
 package net.onlineStore.filters;
 
 import net.onlineStore.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
@@ -13,8 +12,11 @@ import java.io.IOException;
 @Component
 public class CategoryProducerFilter extends AbstractFilter {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+
+    public CategoryProducerFilter(ProductService productService) {
+        this.productService = productService;
+    }
 
     @Override
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {

@@ -3,31 +3,36 @@ package net.onlineStore.services.impl;
 import net.onlineStore.entities.Category;
 import net.onlineStore.entities.Producer;
 import net.onlineStore.entities.Product;
+import net.onlineStore.exception.InternalServerErrorException;
 import net.onlineStore.form.SearchForm;
 import net.onlineStore.repositories.CategoryRepository;
 import net.onlineStore.repositories.ProducerRepository;
 import net.onlineStore.repositories.ProductRepository;
 import net.onlineStore.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
-    @Autowired
-    private ProducerRepository producerRepository;
+    private final ProducerRepository producerRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository, ProducerRepository producerRepository, CategoryRepository categoryRepository) {
+        this.productRepository = productRepository;
+        this.producerRepository = producerRepository;
+        this.categoryRepository = categoryRepository;
+    }
 
     @Override
     public Page<Product> findAllProducts(Pageable pageable) {
@@ -67,5 +72,15 @@ class ProductServiceImpl implements ProductService {
         List<Category> categories = categoryRepository.findAll();
         categories.sort(Comparator.comparing(Category::getName));
         return categories;
+    }
+
+    @Override
+    public Product findById(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            return product.get();
+        } else {
+            throw new InternalServerErrorException("Product not found by id=" + id);
+        }
     }
 }

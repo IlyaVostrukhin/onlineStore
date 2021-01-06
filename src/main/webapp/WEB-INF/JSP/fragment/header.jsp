@@ -21,18 +21,18 @@
         </div>
         <div class="collapse navbar-collapse" id="ishopNav" style="margin: 8px">
             <ul id="currentShoppingCart"
-                class="nav navbar-nav navbar-right ${CURRENT_SHOPPING_CART == null ? 'hidden' : ''}">
+                class="nav navbar-nav navbar-right ${currentShoppingCart == null ? 'hidden' : ''}">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i> Корзина <br>
-                        Количество: <span class="total-count">${CURRENT_SHOPPING_CART.totalCount}</span> шт <br>
-                        Сумма: <span class="total-cost">${CURRENT_SHOPPING_CART.totalCost}</span> ₽
+                        Количество: <span class="total-count">${currentShoppingCart.totalCount}</span> шт <br>
+                        Сумма: <span class="total-cost">${currentShoppingCart.totalCost}</span> ₽
                         <span class="caret"></span>
                     </a>
                     <div class="dropdown-menu shopping-cart-desc">
-                        Количество: <span class="total-count">${CURRENT_SHOPPING_CART.totalCount}</span><br>
-                        Сумма: <span class="total-cost">${CURRENT_SHOPPING_CART.totalCost}</span><br>
+                        Количество: <span class="total-count">${currentShoppingCart.totalCount}</span><br>
+                        Сумма: <span class="total-cost">${currentShoppingCart.totalCost}</span><br>
                         <a href="/shopping-cart" class="btn btn-primary btn-block">Детали заказа</a>
                     </div>
                 </li>
