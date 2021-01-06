@@ -16,7 +16,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="item" items="${CURRENT_SHOPPING_CART.items}">
+        <c:forEach var="item" items="${currentShoppingCart.items}">
             <tr id="product${item.product.id}" class="item">
                 <td class="text-center"><img class="small" src="${item.product.imageLink}"
                                              alt="${item.product.name}"><br>${item.product.name}</td>
@@ -40,7 +40,7 @@
         </c:forEach>
         <tr>
             <td colspan="2" class="text-right"><strong>Итого:</strong></td>
-            <td colspan="2" class="total">₽ ${CURRENT_SHOPPING_CART.totalCost}</td>
+            <td colspan="2" class="total">₽ ${currentShoppingCart.totalCost}</td>
         </tr>
         </tbody>
     </table>

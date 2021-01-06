@@ -20,4 +20,6 @@ public interface ProductService {
     List<Producer> findAllProducers();
 
     List<Category> findAllCategories();
+
+    Product findById(Long id);
 }

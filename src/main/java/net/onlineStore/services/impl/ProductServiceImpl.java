@@ -3,6 +3,7 @@ package net.onlineStore.services.impl;
 import net.onlineStore.entities.Category;
 import net.onlineStore.entities.Producer;
 import net.onlineStore.entities.Product;
+import net.onlineStore.exception.InternalServerErrorException;
 import net.onlineStore.form.SearchForm;
 import net.onlineStore.repositories.CategoryRepository;
 import net.onlineStore.repositories.ProducerRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -70,5 +72,15 @@ class ProductServiceImpl implements ProductService {
         List<Category> categories = categoryRepository.findAll();
         categories.sort(Comparator.comparing(Category::getName));
         return categories;
+    }
+
+    @Override
+    public Product findById(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            return product.get();
+        } else {
+            throw new InternalServerErrorException("Product not found by id=" + id);
+        }
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @EnableSpringDataWebSupport
-@ComponentScan({"net.onlineStore.controllers"})
+@ComponentScan({"net.onlineStore.controllers", "net.onlineStore.model"})
 public class MVCConfig implements WebMvcConfigurer {
 
     @Bean
