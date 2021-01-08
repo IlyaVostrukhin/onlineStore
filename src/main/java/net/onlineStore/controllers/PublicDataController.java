@@ -61,7 +61,6 @@ public class PublicDataController {
             @SortDefault(sort = "id") Pageable pageable
     ) {
         Page<Product> products = productService.findAllProducts(pageable);
-        setCurrentShoppingCart(request, productService);
         model.addAttribute("products", products.getContent());
         return "../fragment/product-list";
     }
@@ -93,7 +92,6 @@ public class PublicDataController {
     ) {
         Category category = categoryService.findCategoryByUrl("/" + categoryName);
         Page<Product> products = productService.findAllByCategory(category, pageable);
-        setCurrentShoppingCart(request, productService);
         model.addAttribute("products", products.getContent());
         return "../fragment/product-list";
     }
@@ -130,7 +128,6 @@ public class PublicDataController {
     ) {
         SearchForm searchForm = new SearchForm(query, category, producer);
         Page<Product> products = productService.findAllBySearchForm(searchForm, pageable);
-        setCurrentShoppingCart(request, productService);
         model.addAttribute("products", products.getContent());
         return "../fragment/product-list";
     }
