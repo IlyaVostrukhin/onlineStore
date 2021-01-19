@@ -1,6 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="CURRENT_PROFILE"/>
+    <c:set var="showEdit" value="${CURRENT_PROFILE.id == profile.id }" />
+</sec:authorize>
 
 <nav class="navbar navbar-default" style="height: 90px">
     <div class="container-fluid">
@@ -38,10 +43,10 @@
                 </li>
             </ul>
             <c:choose>
-                <c:when test="${CURRENT_ACCOUNT != null}">
+                <c:when test="${CURRENT_PROFILE != null}">
                     <ul class="nav navbar-nav navbar-right">
                         <li style="vertical-align: top; text-align: right"><a href="/orders">Добро пожаловать,
-                            <br>${CURRENT_ACCOUNT.fullName}!</a></li>
+                            <br>${CURRENT_PROFILE.name}!</a></li>
                         <li style="vertical-align: top;"><a href="/orders">Мои заказы</a></li>
                         <li style="vertical-align: top;">
                             <a href="javascript:void(0);" class="post-request" data-url="/sign-out">Выйти</a>

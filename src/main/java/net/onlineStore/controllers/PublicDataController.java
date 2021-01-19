@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static net.onlineStore.Utils.*;
+import static net.onlineStore.utils.ShoppingCartUtil.*;
 
 @Slf4j
 @Controller
@@ -56,7 +56,6 @@ public class PublicDataController {
     @RequestMapping(value = "/ajax/html/more/products", method = RequestMethod.GET)
     public String getMoreProducts(
             Model model,
-            HttpServletRequest request,
             @PageableDefault(size = Constants.MAX_PRODUCTS_PER_HTML_PAGE)
             @SortDefault(sort = "id") Pageable pageable
     ) {
@@ -86,7 +85,6 @@ public class PublicDataController {
     public String getMoreProductsByCategory(
             @PathVariable String categoryName,
             Model model,
-            HttpServletRequest request,
             @PageableDefault(size = Constants.MAX_PRODUCTS_PER_HTML_PAGE)
             @SortDefault(sort = "id") Pageable pageable
     ) {
@@ -122,7 +120,6 @@ public class PublicDataController {
             @RequestParam(required = false) String[] category,
             @RequestParam(required = false) String[] producer,
             Model model,
-            HttpServletRequest request,
             @PageableDefault(size = Constants.MAX_PRODUCTS_PER_HTML_PAGE)
             @SortDefault(sort = "id") Pageable pageable
     ) {

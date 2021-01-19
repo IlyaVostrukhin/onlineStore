@@ -1,11 +1,12 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <div id="shoppingCart">
-    <c:if test="${CURRENT_ACCOUNT == null}">
+    <sec:authorize access="!isAuthenticated()">
         <div class="alert alert-warning hidden-print" role="alert">Для создания заказа, пожалуйста, авторизуйтесь</div>
-    </c:if>
+    </sec:authorize>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -46,7 +47,7 @@
     </table>
         <div class="row hidden-print">
             <div class="col-md-4 col-md-offset-4 col-lg-2 col-lg-offset-5">
-                <c:if test="${CURRENT_ACCOUNT == null}">
+                <sec:authorize access="!isAuthenticated()">
                 <form action="/sign-in" method="get">
                     <c:if test="${fn:startsWith(CURRENT_REQUEST_URL,'/search') or fn:startsWith(CURRENT_REQUEST_URL, '/products') or
 						CURRENT_REQUEST_URL == '/shopping-cart' }">
@@ -55,10 +56,10 @@
                     </c:if>
                     <button type="submit" class="btn btn-primary">Войти</button>
                 </form>
-                </c:if>
-                <c:if test="${CURRENT_ACCOUNT != null}">
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
                     <a href="javascript:void(0);" class="post-request btn btn-primary" data-url="/order">Создать заказ</a>
-                </c:if>
+                </sec:authorize>
             </div>
         </div>
 </div>

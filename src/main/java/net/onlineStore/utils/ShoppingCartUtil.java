@@ -1,5 +1,6 @@
-package net.onlineStore;
+package net.onlineStore.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import net.onlineStore.entities.Product;
 import net.onlineStore.form.ProductForm;
 import net.onlineStore.model.ShoppingCart;
@@ -10,7 +11,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public final class Utils {
+@Slf4j
+public final class ShoppingCartUtil {
     public static void setCurrentShoppingCart(HttpServletRequest request, ProductService productService) {
         Cookie cookie = findCookie(request);
         if (cookie != null) {
@@ -75,7 +77,7 @@ public final class Utils {
                 Product product = productService.findById(productForm.getIdProduct());
                 shoppingCart.addProduct(product, productForm.getCount());
             } catch (RuntimeException e) {
-//                LOGGER.error("Can't add product to ShoppingCart during deserialization: item=" + item, e);
+                log.error("Can't add product to ShoppingCart during deserialization: item=" + item, e);
             }
         }
         return shoppingCart.getItems().isEmpty() ? null : shoppingCart;
