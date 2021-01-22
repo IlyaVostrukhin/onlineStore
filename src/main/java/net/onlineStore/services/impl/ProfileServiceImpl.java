@@ -1,7 +1,9 @@
 package net.onlineStore.services.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import net.onlineStore.Constants;
 import net.onlineStore.entities.Profile;
+import net.onlineStore.entities.Role;
 import net.onlineStore.model.CurrentProfile;
 import net.onlineStore.repositories.ProfileRepository;
 import net.onlineStore.services.ProfileService;
@@ -10,6 +12,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -29,6 +35,12 @@ public class ProfileServiceImpl implements ProfileService, UserDetailsService {
             profile = profileRepository.findByEmail(anyUniqueId);
             if (profile == null) {
                 profile = profileRepository.findByPhone(anyUniqueId);
+                if (profile == null) {
+                    Optional<Profile> profileById = profileRepository.findById(Long.parseLong(anyUniqueId));
+                    if (profileById.isPresent()) {
+                        profile = profileById.get();
+                    }
+                }
             }
         }
         return profile;
@@ -46,7 +58,7 @@ public class ProfileServiceImpl implements ProfileService, UserDetailsService {
     }
 
     public Profile saveProfile(Profile profile) {
-//ToDo        profile.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        profile.setRoles(Collections.singleton(new Role(1L, Constants.USER)));
         profile.setPassword(passwordEncoder.encode(profile.getPassword()));
         return profileRepository.save(profile);
     }
@@ -64,5 +76,10 @@ public class ProfileServiceImpl implements ProfileService, UserDetailsService {
     @Override
     public Profile findByPhone(String phone) {
         return profileRepository.findByPhone(phone);
+    }
+
+    @Override
+    public List<Profile> findAll() {
+        return profileRepository.findAll();
     }
 }

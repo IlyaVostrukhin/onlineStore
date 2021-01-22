@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h4 class="text-center">Мои заказы</h4>
+<h4 class="text-center">${auth}</h4>
 <hr />
 <table id="myOrders" class="table table-bordered" data-page-number="1" data-page-count="${pageCount }">
     <thead>
@@ -14,7 +15,8 @@
     <tbody>
     <c:if test="${empty orders }">
         <tr>
-            <td colspan="2" class="text-center">Заказы не найдены</td>
+            <td colspan="2" class="text-center">У Вас еще нет заказов. Самое время создать первый!<br>
+                Для создания заказа добавьте товар в корзину и нажмите Создать заказ в корзине.</td>
         </tr>
     </c:if>
     <jsp:include page="../fragment/orders-tbody.jsp" />

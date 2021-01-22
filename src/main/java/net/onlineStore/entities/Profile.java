@@ -1,62 +1,54 @@
 package net.onlineStore.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
-@Table(name = "account")
+@Table(name = "profile")
 public class Profile extends AbstractEntity<Long> {
     private static final long serialVersionUID = -5873271526854116984L;
 
-//    ToDo: rename table and seq to "profile"
     @Id
-    @SequenceGenerator(name = "PROFILE_ID_GENERATOR", sequenceName = "ACCOUNT_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "PROFILE_ID_GENERATOR", sequenceName = "PROFILE_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROFILE_ID_GENERATOR")
     @Column(unique = true, nullable = false)
     private Long id;
 
     @Column
-    @Size(min=2, message = "Не меньше 2 символов")
     private String name;
 
     @Column
-    @Size(min=2, message = "Не меньше 2 символов")
     private String surName;
 
     @Column
-    @Size(min=2, message = "Не меньше 2 символов")
     private String lastName;
 
     @Column
-    @Size(min=8, message = "Не меньше 8 символов")
     private String email;
 
     @Column
-    @Size(min=11, message = "Не меньше 11 символов")
     private String phone;
 
     @Column
-    @Size(min=2, message = "Не меньше 2 символов")
     private String city;
 
     @Column
-    @Size(min=6, message = "Не меньше 6 символов")
     private Integer postcode;
 
     @Column
-    @Size(min=15, message = "Не меньше 15 символов")
     private String address;
 
     @Column
-    @Size(min=5, message = "Не меньше 5 символов")
     private String login;
 
     @Column
-    @Size(min=8, message = "Не меньше 8 символов")
     private String password;
 
     @Transient
     private String confirmPassword;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     @Override
     public Long getId() {
@@ -153,5 +145,13 @@ public class Profile extends AbstractEntity<Long> {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

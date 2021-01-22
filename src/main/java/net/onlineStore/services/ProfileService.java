@@ -2,6 +2,8 @@ package net.onlineStore.services;
 
 import net.onlineStore.entities.Profile;
 
+import java.util.List;
+
 public interface ProfileService {
     Profile saveProfile (Profile profile);
 
@@ -10,4 +12,6 @@ public interface ProfileService {
     Profile findByEmail (String email);
 
     Profile findByPhone (String phone);
+
+    List<Profile> findAll();
 }
