@@ -8,6 +8,8 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.filter.RequestContextFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import net.onlineStore.filters.StoreFilter;
 import net.onlineStore.listeners.ApplicationListener;
@@ -40,6 +42,8 @@ public class StoreWebApplicationInitializer implements WebApplicationInitializer
         registerFilter(container, ctx.getBean(StoreFilter.class));
         registerFilter(container, ctx.getBean(CategoryProducerFilter.class));
         registerFilter(container, new CharacterEncodingFilter("UTF-8", true));
+        registerFilter(container, new RequestContextFilter());
+        registerFilter(container, new DelegatingFilterProxy("springSecurityFilterChain"), "springSecurityFilterChain");
         registerFilter(container, buildConfigurableSiteMeshFilter(), "sitemesh");
     }
 

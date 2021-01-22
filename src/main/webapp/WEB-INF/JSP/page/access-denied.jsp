@@ -7,6 +7,22 @@
     <c:set var="showEdit" value="${CURRENT_PROFILE.id == profile.id }"/>
 </sec:authorize>
 
+<!DOCTYPE html>
+<fmt:requestEncoding value="utf-8"/>
+<html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NoName</title>
+    <link rel="icon" href="${pageContext.request.contextPath}/static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/app.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/font-awesome.css">
+</head>
+<body>
 <nav class="navbar navbar-default" style="height: 90px">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -75,3 +91,30 @@
         </div>
     </div>
 </nav>
+<div class="container-fluid text-center">
+            <h2>
+                <c:if test="${CURRENT_PROFILE != null}">
+                    ${CURRENT_PROFILE.name},
+                </c:if>
+            </h2>
+            <h4>
+                у Вас нет прав для просмотра этой страницы.
+            </h4>
+            <h4>
+                Пожалуйста, вернитесь на страницу магазина.
+            </h4>
+            <h4>
+                Приятных Вам покупок!
+            </h4>
+            <a href="/" class="btn btn-primary">Главная</a>
+</div>
+</body>
+<footer class="footer" style="position: absolute; bottom: 0">
+    <jsp:include page="../fragment/footer.jsp"/>
+</footer>
+<script src="${pageContext.request.contextPath}/static/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/app.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/jquery.maskedinput.min.js"></script>
+</body>
+</html>
