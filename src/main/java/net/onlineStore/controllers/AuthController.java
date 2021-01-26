@@ -43,6 +43,9 @@ public class AuthController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("profileForm", new Profile());
+        if (SecurityUtils.getCurrentProfile() != null) {
+            return "redirect:/orders";
+        }
         return "registration";
     }
 
