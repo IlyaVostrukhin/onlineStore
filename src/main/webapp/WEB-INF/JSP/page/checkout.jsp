@@ -34,7 +34,6 @@
     <div class="form-row">
         <div class="form-group col-md-12" style="display: flex; align-items: center; justify-content: center;">
             <button type="submit" class="btn btn-primary">Сформировать заказ</button>
-<%--            "javascript:store.postReq('/checkout', '${_csrf.token}');" --%>
         </div>
     </div>
 </form:form>

@@ -76,13 +76,6 @@
                     </ul>
                 </c:when>
                 <c:otherwise>
-                    <c:if test="${fn:startsWith(CURRENT_REQUEST_URL,'/search') or fn:startsWith(CURRENT_REQUEST_URL, '/products') or
-                    						CURRENT_REQUEST_URL == '/shopping-cart' }">
-                        <u:urlEncode url="${CURRENT_REQUEST_URL }" var="encodedUrl"/>
-                    </c:if>
-                    <c:if test="${target != null}">
-                        <u:urlEncode url="${target }" var="encodedUrl"/>
-                    </c:if>
                     <ul class="nav navbar-nav navbar-right">
                         <li style="vertical-align: top;"><a href="/sign-in?target=${encodedUrl}">Войти</a></li>
                     </ul>

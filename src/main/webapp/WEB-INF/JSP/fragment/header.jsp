@@ -22,7 +22,6 @@
                      style="height: 65px">
                 <span class="visible-sm visible-xs">NoName</span>
             </a>
-            <%--            <a class="navbar-brand" href="/products" style="color: #595959">NoName</a>--%>
         </div>
         <div class="collapse navbar-collapse" id="ishopNav" style="margin: 8px">
             <ul id="currentShoppingCart"
@@ -55,20 +54,13 @@
                         </c:if>
                         <li style="vertical-align: top;"><a href="/orders">Мои заказы</a></li>
                         <li style="vertical-align: top;">
-                            <a href="javascript:store.postReq('/sign-out', '${_csrf.token}');">Выйти</a>
+                            <a href="javascript:store.logout('83anbx76-${_csrf.token}-srf32a');">Выйти</a>
                         </li>
                     </ul>
                 </c:when>
                 <c:otherwise>
-                    <c:if test="${fn:startsWith(CURRENT_REQUEST_URL,'/search') or fn:startsWith(CURRENT_REQUEST_URL, '/products') or
-                    						CURRENT_REQUEST_URL == '/shopping-cart' }">
-                        <u:urlEncode url="${CURRENT_REQUEST_URL }" var="encodedUrl"/>
-                    </c:if>
-                    <c:if test="${target != null}">
-                        <u:urlEncode url="${target }" var="encodedUrl"/>
-                    </c:if>
                     <ul class="nav navbar-nav navbar-right">
-                        <li style="vertical-align: top;"><a href="/sign-in?target=${encodedUrl}">Войти</a></li>
+                        <li style="vertical-align: top;"><a href="/sign-in">Войти</a></li>
                     </ul>
                 </c:otherwise>
             </c:choose>

@@ -231,7 +231,7 @@
         var btn = $('#loadMoreMyOrders');
         convertButtonToLoader(btn, 'btn-success');
         var pageNumber = parseInt($('#myOrders').attr('data-page-number'));
-        var url = '/ajax/html/more/orders?page=' +  pageNumber;
+        var url = '/ajax/html/more/orders?page=' + pageNumber;
         $.ajax({
             url: url,
             success: function (html) {
@@ -277,5 +277,31 @@ var store = {
 
         document.body.appendChild(form);
         form.submit();
+    },
+
+    post: function (path, params) {
+        var form = document.createElement("form");
+        form.setAttribute("method", 'post');
+        form.setAttribute("action", path);
+        for (var key in params) {
+            if (params.hasOwnProperty(key)) {
+                var value = params[key];
+                if (value != undefined) {
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", key);
+                    hiddenField.setAttribute("value", params[key]);
+                    form.appendChild(hiddenField);
+                }
+            }
+        }
+        document.body.appendChild(form);
+        form.submit();
+    },
+
+    logout: function (csrfToken) {
+        store.post('/sign-out', {
+            _csrf: csrfToken.toString().replace('-srf32a', '').replace('83anbx76-', '')
+        });
     }
 }

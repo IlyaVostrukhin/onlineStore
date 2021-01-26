@@ -14,8 +14,6 @@ public class OrderStatus extends AbstractEntity<Integer> {
 
     private String name;
 
-    private Integer count;
-
     public OrderStatus() {
     }
 
@@ -39,13 +37,5 @@ public class OrderStatus extends AbstractEntity<Integer> {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
     }
 }
