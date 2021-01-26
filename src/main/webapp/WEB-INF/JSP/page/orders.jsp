@@ -3,13 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <h4 class="text-center">Мои заказы</h4>
-<h4 class="text-center">${auth}</h4>
-<hr />
-<table id="myOrders" class="table table-bordered" data-page-number="1" data-page-count="${pageCount }">
-    <thead>
+<hr/>
+<table id="myOrders" class="table table-bordered" data-page-number="1" data-page-count="${page.totalPages}">
+    <thead style="color: #FFFFFF; background-color: #595959">
     <tr>
-        <th>Номер заказа</th>
-        <th>Дата</th>
+        <th width="5%" class="text-center"><div class="fa fa-edit"></div></th>
+        <th width="10%" class="text-center">Номер заказа</th>
+        <th width="15%" class="text-center">Дата</th>
+        <th width="30%" class="text-center">Адрес</th>
+        <th width="10%" class="text-center">Количество</th>
+        <th width="10%" class="text-center">Сумма</th>
+        <th width="10%" class="text-center">Статус</th>
     </tr>
     </thead>
     <tbody>
@@ -23,7 +27,7 @@
     </tbody>
 </table>
 <div class="text-center hidden-print">
-    <c:if test="${pageCount > 1 }">
+    <c:if test="${page.totalPages > 1 }">
         <a id="loadMoreMyOrders" class="btn btn-success">Показать еще</a>
     </c:if>
 </div>

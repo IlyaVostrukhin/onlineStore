@@ -8,22 +8,25 @@
         <div class="alert alert-warning hidden-print" role="alert">Для создания заказа, пожалуйста, авторизуйтесь</div>
     </sec:authorize>
     <table class="table table-bordered">
-        <thead>
+        <thead style="color: #FFFFFF; background-color: #595959">
         <tr>
-            <th>Наименование товара</th>
-            <th>Цена</th>
-            <th>Количество</th>
-            <th class="hidden-print">Действия</th>
+            <th class="text-center" width="20%">Наименование товара</th>
+            <th class="text-center" width="15%">Изображение</th>
+            <th class="text-center" width="15%">Количество</th>
+            <th class="text-center" width="15%">Цена</th>
+            <th class="text-center" width="15%">Сумма</th>
+            <th class="hidden-print text-center" width="20%">Действия</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="item" items="${currentShoppingCart.items}">
             <tr id="product${item.product.id}" class="item">
-                <td class="text-center"><img class="small" src="${item.product.imageLink}"
-                                             alt="${item.product.name}"><br>${item.product.name}</td>
-                <td class="price">₽ ${item.product.price}</td>
-                <td class="count">${item.count}</td>
-                <td class="hidden-print">
+                <td class="text-center">${item.product.name}</td>
+                <td class="text-center"><img style="max-width: 85%" src="${item.product.imageLink}"></td>
+                <td class="text-center price">₽ ${item.product.price}</td>
+                <td class="text-center count">${item.count}</td>
+                <td class="text-center">₽ ${item.product.price * item.count}</td>
+                <td class="text-center hidden-print">
                     <c:choose>
                         <c:when test="${item.count > 1}">
                             <a class="btn btn-danger remove-product" data-id-product="${item.product.id}"
@@ -40,7 +43,7 @@
             </tr>
         </c:forEach>
         <tr>
-            <td colspan="2" class="text-right"><strong>Итого:</strong></td>
+            <td colspan="4" class="text-right"><strong>Итого:</strong></td>
             <td colspan="2" class="total">₽ ${currentShoppingCart.totalCost}</td>
         </tr>
         </tbody>
@@ -58,7 +61,8 @@
                 </form>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
-                    <a href="javascript:void(0);" class="post-request btn btn-primary" data-url="/order">Создать заказ</a>
+                    <sec:csrfInput/>
+                    <a href="/checkout" class="btn btn-primary">Сформировать заказ</a>
                 </sec:authorize>
             </div>
         </div>

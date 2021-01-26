@@ -55,7 +55,7 @@
                         </c:if>
                         <li style="vertical-align: top;"><a href="/orders">Мои заказы</a></li>
                         <li style="vertical-align: top;">
-                            <a href="javascript:store.logout('${_csrf.token}');">Выйти</a>
+                            <a href="javascript:store.postReq('/sign-out', '${_csrf.token}');">Выйти</a>
                         </li>
                     </ul>
                 </c:when>

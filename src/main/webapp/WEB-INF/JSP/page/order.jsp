@@ -6,7 +6,9 @@
     <c:if test="${CURRENT_MESSAGE != null}">
         <div class="alert alert-success hidden-print" role="alert">${CURRENT_MESSAGE}</div>
     </c:if>
-    <h4 class="text-center">Заказ # ${order.id }</h4>
+    <h3 class="text-center">Заказ № ${order.id } (${order.status.name})</h3>
+    <hr/>
+    <h5>Получатель: ${order.recipient}</h5>
     <hr/>
     <noname:product-table items="${order.items }" totalCost="${order.totalCost }" showActionColumn="false" />
     <div class="row hidden-print">

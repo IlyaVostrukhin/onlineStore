@@ -19,18 +19,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import static net.onlineStore.utils.ShoppingCartUtil.*;
 
 @Slf4j
 @Controller
 public class PublicDataController {
 
     private final ProductService productService;
-
     private final CategoryService categoryService;
-
     private final ShoppingCart shoppingCart;
 
     public PublicDataController(ProductService productService, CategoryService categoryService, ShoppingCart shoppingCart) {
@@ -42,13 +37,12 @@ public class PublicDataController {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String getAllProducts(
             Model model,
-            HttpServletRequest request,
             @PageableDefault(size = Constants.MAX_PRODUCTS_PER_HTML_PAGE)
             @SortDefault(sort = "id") Pageable pageable
     ) {
         Page<Product> products = productService.findAllProducts(pageable);
-        setCurrentShoppingCart(request, productService);
         model.addAttribute("products", products.getContent());
+        updateShoppingCart(model);
         model.addAttribute("page", products);
         return "products";
     }
@@ -68,14 +62,13 @@ public class PublicDataController {
     public String getProductsByCategory(
             @PathVariable String categoryName,
             Model model,
-            HttpServletRequest request,
             @PageableDefault(size = Constants.MAX_PRODUCTS_PER_HTML_PAGE)
             @SortDefault(sort = "id") Pageable pageable
     ) {
         Category category = categoryService.findCategoryByUrl("/" + categoryName);
         Page<Product> products = productService.findAllByCategory(category, pageable);
-        setCurrentShoppingCart(request, productService);
         model.addAttribute("products", products.getContent());
+        updateShoppingCart(model);
         model.addAttribute("page", products);
         model.addAttribute("selectedCategoryUrl", "/" + categoryName);
         return "products";
@@ -100,13 +93,12 @@ public class PublicDataController {
             @RequestParam(required = false) String[] category,
             @RequestParam(required = false) String[] producer,
             Model model,
-            HttpServletRequest request,
             @PageableDefault(size = Constants.MAX_PRODUCTS_PER_HTML_PAGE)
             @SortDefault(sort = "id") Pageable pageable
     ) {
         SearchForm searchForm = new SearchForm(query, category, producer);
         Page<Product> products = productService.findAllBySearchForm(searchForm, pageable);
-        setCurrentShoppingCart(request, productService);
+        updateShoppingCart(model);
         model.addAttribute("products", products.getContent());
         model.addAttribute("page", products);
         model.addAttribute("productCount", (int) products.getTotalElements());
@@ -131,15 +123,16 @@ public class PublicDataController {
 
     @RequestMapping(value = "/ajax/json/product/add", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String addProductToShoppingCart(HttpServletRequest request, HttpServletResponse response) {
+    public String addProductToShoppingCart(
+            HttpServletRequest request,
+            Model model
+    ) {
         ProductForm productForm = new ProductForm(
                 Long.parseLong(request.getParameter("idProduct")),
                 Integer.parseInt(request.getParameter("count"))
         );
         Product product = productService.findById(productForm.getIdProduct());
         shoppingCart.addProduct(product, productForm.getCount());
-
-        updateShoppingCart(response, shoppingCart);
 
         JSONObject cardStatistics = new JSONObject();
         cardStatistics.put("totalCount", shoppingCart.getTotalCount());
@@ -150,17 +143,19 @@ public class PublicDataController {
 
     @RequestMapping(value = "/ajax/json/product/remove", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public String removeProductFromShoppingCart(HttpServletRequest request, HttpServletResponse response) {
+    public String removeProductFromShoppingCart(
+            HttpServletRequest request,
+            Model model
+    ) {
         ProductForm productForm = new ProductForm(
                 Long.parseLong(request.getParameter("idProduct")),
                 Integer.parseInt(request.getParameter("count"))
         );
         shoppingCart.removeProduct(productForm.getIdProduct(), productForm.getCount());
 
-        if (shoppingCart.getItems().isEmpty()) {
-            clearCurrentShoppingCart(request, response);
-        } else {
-            updateShoppingCart(response, shoppingCart);
+        updateShoppingCart(model);
+        if (model.getAttribute("currentShoppingCart") == null) {
+            shoppingCart.clear();
         }
 
         JSONObject cardStatistics = new JSONObject();
@@ -172,18 +167,25 @@ public class PublicDataController {
 
     @RequestMapping(value = "/shopping-cart", method = RequestMethod.GET)
     public String showShoppingCart(
-            HttpServletRequest request
+            Model model
     ) {
-        if (shoppingCart != null) {
-            setCurrentShoppingCart(request, productService);
-            return "shopping-cart";
-        } else {
+        updateShoppingCart(model);
+        if (model.getAttribute("currentShoppingCart") == null) {
             return "redirect:/products";
         }
+        return "shopping-cart";
     }
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public String getError() {
         return "error";
+    }
+
+    private void updateShoppingCart(Model model) {
+        if (shoppingCart.getItems().isEmpty()) {
+            model.addAttribute("currentShoppingCart", null);
+        } else {
+            model.addAttribute("currentShoppingCart", shoppingCart);
+        }
     }
 }

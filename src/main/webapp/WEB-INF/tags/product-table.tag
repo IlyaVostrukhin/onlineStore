@@ -6,11 +6,13 @@
 <%@ attribute name="showActionColumn" required="true" type="java.lang.Boolean"%>
 
 <table class="table table-bordered">
-    <thead>
+    <thead style="color: #FFFFFF; background-color: #595959">
     <tr>
-        <th>Наименование товара</th>
-        <th>Цена</th>
-        <th>Количество</th>
+        <th class="text-center" width="25%">Наименование товара</th>
+        <th class="text-center" width="15%">Изображение</th>
+        <th class="text-center" width="20%">Количество</th>
+        <th class="text-center" width="20%">Цена</th>
+        <th class="text-center" width="20%">Сумма</th>
         <c:if test="${showActionColumn }">
             <th class="hidden-print">Действие</th>
         </c:if>
@@ -19,9 +21,11 @@
     <tbody>
     <c:forEach var="item" items="${items }">
         <tr id="product${item.product.id }" class="item">
-            <td class="text-center"><img class="small" src="${item.product.imageLink }" alt="${item.product.name }"><br>${item.product.name }</td>
-            <td class="price">₽ ${item.product.price }</td>
-            <td class="count">${item.count }</td>
+            <td class="text-center">${item.product.name }</td>
+            <td class="text-center"><img style="max-width: 85%" src="${item.product.imageLink }" alt="${item.product.name }"></td>
+            <td class="text-center" class="count">${item.count }</td>
+            <td class="text-center" class="price">₽ ${item.product.price }</td>
+            <td class="text-center" class="price">₽ ${item.product.price * item.count }</td>
             <c:if test="${showActionColumn }">
                 <td class="hidden-print">
                     <c:choose>
@@ -38,7 +42,7 @@
         </tr>
     </c:forEach>
     <tr>
-        <td colspan="2" class="text-right"><strong>Итого:</strong></td>
+        <td colspan="4" class="text-right"><strong>Итого:</strong></td>
         <td colspan="${showActionColumn ? 2 : 1}" class="total">₽ ${totalCost}</td>
     </tr>
     </tbody>

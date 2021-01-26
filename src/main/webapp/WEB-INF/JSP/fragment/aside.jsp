@@ -9,7 +9,6 @@
 </div>
 <!-- Search form -->
 <form class="search" action="/search" enctype="application/x-www-form-urlencoded">
-    <sec:csrfInput/>
     <div id="findProducts" class="panel panel-primary collapse">
         <div class="panel-heading">Найти товар</div>
         <div class="panel-body">

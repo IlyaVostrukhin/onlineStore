@@ -209,6 +209,7 @@
                     var remCount = parseInt(count);
                     if (remCount >= prevCount) {
                         $('#product' + idProduct).remove();
+                        $('#product' + idProduct).remove();
                     } else {
                         convertLoaderToButton(btn, 'btn-danger', removeProductFromCart);
                         $('#product' + idProduct + ' .count').text(prevCount - remCount);
@@ -230,7 +231,7 @@
         var btn = $('#loadMoreMyOrders');
         convertButtonToLoader(btn, 'btn-success');
         var pageNumber = parseInt($('#myOrders').attr('data-page-number'));
-        var url = '/ajax/html/more/orders?page=' + (pageNumber + 1);
+        var url = '/ajax/html/more/orders?page=' +  pageNumber;
         $.ajax({
             url: url,
             success: function (html) {
@@ -263,10 +264,10 @@ $(document).ready(function () {
 });
 
 var store = {
-    logout: function (csrfToken) {
+    postReq: function (url, csrfToken) {
         var form = document.createElement("form");
         form.setAttribute("method", 'post');
-        form.setAttribute("action", "/sign-out");
+        form.setAttribute("action", url);
 
         var hiddenField = document.createElement("input");
         hiddenField.setAttribute("type", "hidden");

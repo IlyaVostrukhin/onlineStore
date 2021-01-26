@@ -1,9 +1,9 @@
 package net.onlineStore.repositories;
 
-import net.onlineStore.entities.Role;
+import net.onlineStore.entities.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
 }
