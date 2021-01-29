@@ -1,0 +1,43 @@
+<%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" trimDirectiveWhitespaces="true" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page session="false" %>
+
+<!DOCTYPE html>
+<fmt:requestEncoding value="utf-8"/>
+<html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NoName</title>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <link rel="icon" href="${pageContext.request.contextPath}/static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/app.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/font-awesome.css">
+</head>
+<body>
+<header>
+    <jsp:include page="fragment/header.jsp"/>
+</header>
+<div class="container-fluid" style="min-height: 72vh;">
+    <div class="row">
+        <main >
+            <section class="main">
+                <sitemesh:write property='body'/>
+            </section>
+        </main>
+    </div>
+</div>
+<footer class="footer" style="margin-top: auto">
+    <jsp:include page="fragment/footer.jsp"/>
+</footer>
+<script src="${pageContext.request.contextPath}/static/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/app.js"></script>
+<script src="${pageContext.request.contextPath}/static/js/jquery.maskedinput.min.js"></script>
+</body>
+</html>
