@@ -31,17 +31,19 @@
             </th>
             </thead>
             <tbody>
-                <jsp:include page="../../fragment/users-tbody.jsp"/>
+            <jsp:include page="../../fragment/users-tbody.jsp"/>
             </tbody>
         </table>
-        <div class="col-md-4"></div>
-        <div class="text-center hidden-print col-md-4">
-            <c:if test="${page.totalPages > 1}">
-                <a id="loadMoreUsers" class="btn btn-success">Показать еще</a>
-            </c:if>
-        </div>
-        <div class="text-right col-md-4">
-            <a href="#" class="btn btn-primary" onclick="history.go(-1)">Вернуться назад</a>
+        <div class="row">
+            <div class="col-xs-4"></div>
+            <div class="text-center hidden-print col-xs-4">
+                <c:if test="${page.totalPages > 1}">
+                    <a id="loadMoreUsers" class="btn btn-success">Показать еще</a>
+                </c:if>
+            </div>
+            <div class="text-right col-xs-4">
+                <a href="/admin" class="btn btn-primary">Вернуться назад</a>
+            </div>
         </div>
     </div>
 </div>

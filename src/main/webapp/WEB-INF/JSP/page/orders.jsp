@@ -7,13 +7,13 @@
 <table id="myOrders" class="table table-bordered" data-page-number="1" data-page-count="${page.totalPages}">
     <thead style="color: #FFFFFF; background-color: #595959">
     <tr>
-        <th width="5%" class="text-center"><div class="fa fa-edit"></div></th>
-        <th width="10%" class="text-center">Номер заказа</th>
-        <th width="15%" class="text-center">Дата</th>
-        <th width="30%" class="text-center">Адрес</th>
-        <th width="10%" class="text-center">Количество</th>
-        <th width="10%" class="text-center">Сумма</th>
-        <th width="10%" class="text-center">Статус</th>
+        <th width="5%" class="text-center" style="vertical-align: top"><div class="fa fa-edit"></div></th>
+        <th width="10%" class="text-center" style="vertical-align: top">Номер заказа</th>
+        <th width="15%" class="text-center" style="vertical-align: top">Дата</th>
+        <th width="35%" class="text-center hidden-xs" style="vertical-align: top">Получатель</th>
+        <th width="5%" class="text-center" style="vertical-align: top">Количество</th>
+        <th width="10%" class="text-center" style="vertical-align: top">Сумма</th>
+        <th width="10%" class="text-center" style="vertical-align: top">Статус</th>
     </tr>
     </thead>
     <tbody>

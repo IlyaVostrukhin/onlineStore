@@ -99,12 +99,12 @@
             </div>
             <br/>
             <div class="form-row">
-                <div class="col-md-4"></div>
-                <div class="form-group col-md-4 text-center">
+                <div class="col-xs-4"></div>
+                <div class="form-group col-xs-4 text-center">
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </div>
-                <div class="form-group col-md-4 text-right">
-                    <a href="#" class="btn btn-primary" onclick="history.go(-1)">Вернуться назад</a>
+                <div class="form-group col-xs-4 text-right">
+                    <a href="/admin/users" class="btn btn-primary">Вернуться назад</a>
                 </div>
             </div>
         </form:form>

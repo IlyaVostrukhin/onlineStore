@@ -64,6 +64,7 @@
                 $('#currentShoppingCart .total-count').text(data.totalCount);
                 $('#currentShoppingCart .total-cost').text(data.totalCost);
                 $('#currentShoppingCart').removeClass('hidden');
+                $('#currentShoppingCartSmall').removeClass('hidden');
                 convertLoaderToButton(btn, 'btn-primary', addProductToCart);
                 $('#addProductPopup').modal('hide');
             },

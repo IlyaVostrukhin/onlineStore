@@ -203,3 +203,24 @@ img.small {
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before{
     background-color:black;
 }
+
+@media (min-width: 1350px) {
+    .hidden-xlg {
+        display: none !important;
+    }
+}
+
+.visible-xlg {
+    display: none !important;
+}
+@media (min-width: 1350px) {
+    .visible-xlg {
+        display: block !important;
+    }
+}
+
+@media (min-width: 1350px) {
+    .navbar-height {
+        height: 90px;
+    }
+}
