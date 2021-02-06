@@ -8,8 +8,9 @@
 <table class="table table-bordered">
     <thead style="color: #FFFFFF; background-color: #595959">
     <tr>
-        <th class="text-center" width="25%">Наименование товара</th>
-        <th class="text-center" width="15%">Изображение</th>
+        <th class="text-center" width="10%">Артикул</th>
+        <th class="text-center" width="20%">Наименование товара</th>
+        <th class="text-center" width="10%">Изображение</th>
         <th class="text-center" width="20%">Количество</th>
         <th class="text-center" width="20%">Цена</th>
         <th class="text-center" width="20%">Сумма</th>
@@ -21,11 +22,12 @@
     <tbody>
     <c:forEach var="item" items="${items }">
         <tr id="product${item.product.id }" class="item">
+            <td class="text-center">${item.product.id }</td>
             <td class="text-center">${item.product.name }</td>
             <td class="text-center"><img style="max-width: 85%" src="${item.product.imageLink }" alt="${item.product.name }"></td>
             <td class="text-center" class="count">${item.count }</td>
-            <td class="text-center" class="price">₽ ${item.product.price }</td>
-            <td class="text-center" class="price">₽ ${item.product.price * item.count }</td>
+            <td class="text-center" class="price">₽ ${item.price }</td>
+            <td class="text-center" class="price">₽ ${item.price * item.count }</td>
             <c:if test="${showActionColumn }">
                 <td class="hidden-print">
                     <c:choose>
@@ -42,7 +44,7 @@
         </tr>
     </c:forEach>
     <tr>
-        <td colspan="4" class="text-right"><strong>Итого:</strong></td>
+        <td colspan="5" class="text-right"><strong>Итого:</strong></td>
         <td colspan="${showActionColumn ? 2 : 1}" class="total">₽ ${totalCost}</td>
     </tr>
     </tbody>

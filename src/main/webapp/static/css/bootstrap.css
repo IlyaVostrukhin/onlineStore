@@ -2318,6 +2318,9 @@ th {
 .table-bordered > thead > tr > td {
   border-bottom-width: 2px;
 }
+.table-bordered > tbody > tr:hover {
+  background: #bdecc0;
+}
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: #f9f9f9;
 }
@@ -4247,7 +4250,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     border-radius: 4px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-header {
     float: left;
   }
@@ -4264,7 +4267,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-collapse.in {
   overflow-y: auto;
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-collapse {
     width: auto;
     border-top: 0;
@@ -4304,7 +4307,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-right: -15px;
   margin-left: -15px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .container > .navbar-header,
   .container-fluid > .navbar-header,
   .container > .navbar-collapse,
@@ -4358,7 +4361,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand > img {
   display: block;
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
     margin-left: -15px;
@@ -4388,7 +4391,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-toggle {
     display: none;
   }
@@ -4553,7 +4556,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-left: 15px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 1200px) {
   .navbar-left {
     float: left !important;
   }
@@ -5774,6 +5777,16 @@ button.list-group-item-danger.active:focus {
 }
 .panel-default > .panel-footer + .panel-collapse > .panel-body {
   border-bottom-color: #ddd;
+}
+.panel-primary-icon {
+  text-align: center;
+  border: 5px solid #595959;
+  border-radius: 5%;
+  background-color: #efefef;
+  height: 210px;
+}
+.panel-primary-icon:hover {
+  border: 5px solid #a8ca1b;
 }
 .panel-primary {
   border-color: #595959;

@@ -7,6 +7,8 @@ import net.onlineStore.entities.Role;
 import net.onlineStore.model.CurrentProfile;
 import net.onlineStore.repositories.ProfileRepository;
 import net.onlineStore.services.ProfileService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,12 +18,12 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 @Service
 public class ProfileServiceImpl implements ProfileService, UserDetailsService {
     private final ProfileRepository profileRepository;
-
     private final PasswordEncoder passwordEncoder;
 
     public ProfileServiceImpl(ProfileRepository profileRepository, PasswordEncoder passwordEncoder) {
@@ -58,9 +60,30 @@ public class ProfileServiceImpl implements ProfileService, UserDetailsService {
     }
 
     public Profile saveProfile(Profile profile) {
-        profile.setRoles(Collections.singleton(new Role(1L, Constants.USER)));
-        profile.setPassword(passwordEncoder.encode(profile.getPassword()));
+        Profile getProfile = findById(profile.getId());
+        if (profile.getRoles() == null){
+            profile.setRoles(Collections.singleton(new Role(1L, Constants.USER)));
+        }
+        if (!profile.getPassword().isEmpty()) {
+            profile.setPassword(passwordEncoder.encode(profile.getPassword()));
+        } else {
+            profile.setPassword(getProfile.getPassword());
+        }
         return profileRepository.save(profile);
+    }
+
+    @Override
+    public Profile findById(Long id) {
+        Optional<Profile> profile = profileRepository.findById(id);
+        return profile.orElse(null);
+    }
+
+    @Override
+    public Profile editUser(Set<Role> roles, Profile profile) {
+        profile.setRoles(roles);
+        profile.setPassword(passwordEncoder.encode(profile.getPassword()));
+        profileRepository.save(profile);
+        return null;
     }
 
     @Override
@@ -79,7 +102,12 @@ public class ProfileServiceImpl implements ProfileService, UserDetailsService {
     }
 
     @Override
-    public List<Profile> findAll() {
-        return profileRepository.findAll();
+    public Page<Profile> findAll(Pageable pageable) {
+        return profileRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Profile> searchUsers(String query, Pageable pageable) {
+        return profileRepository.searchUsers(query, pageable);
     }
 }

@@ -1,6 +1,7 @@
 package net.onlineStore.entities;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -18,11 +19,14 @@ public class OrderItem extends AbstractEntity<Long> {
     private Long idOrder;
 
     @OneToOne
-    @JoinColumn (name="id_product")
+    @JoinColumn(name = "id_product")
     private Product product;
 
     @Column
     private int count;
+
+    @Column
+    private BigDecimal price;
 
     @Transient
     @ManyToMany(mappedBy = "items")
@@ -63,6 +67,14 @@ public class OrderItem extends AbstractEntity<Long> {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Set<Order> getOrders() {

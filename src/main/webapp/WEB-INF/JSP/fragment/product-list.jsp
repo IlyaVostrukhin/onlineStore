@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <h4 class="name">${p.name }</h4>
-                <div class="code">Код: ${p.id }</div>
+                <div class="code">Артикул: ${p.id }</div>
                 <div class="price">₽ ${p.price }</div>
                 <a class="btn btn-primary pull-right buy-btn" data-id-product="${p.id }">Купить</a>
                 <div class="list-group">

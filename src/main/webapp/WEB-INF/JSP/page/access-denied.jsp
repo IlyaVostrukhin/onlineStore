@@ -85,21 +85,22 @@
     </div>
 </nav>
 <div class="container-fluid text-center">
-            <h2>
-                <c:if test="${CURRENT_PROFILE != null}">
-                    ${CURRENT_PROFILE.name},
-                </c:if>
-            </h2>
-            <h4>
-                у Вас нет прав для просмотра этой страницы.
-            </h4>
-            <h4>
-                Пожалуйста, вернитесь на страницу магазина.
-            </h4>
-            <h4>
-                Приятных Вам покупок!
-            </h4>
-            <a href="/" class="btn btn-primary">Главная</a>
+    <h2>
+        <c:if test="${CURRENT_PROFILE != null}">
+            ${CURRENT_PROFILE.name},
+        </c:if>
+    </h2>
+    <h4>
+        у Вас нет прав для просмотра этой страницы.
+    </h4>
+    <h4>
+        Пожалуйста, вернитесь на страницу магазина.
+    </h4>
+    <h4>
+        Приятных Вам покупок!
+    </h4>
+    <br/>
+    <a href="#" class="btn btn-primary" onclick="history.go(-1)">Вернуться назад</a>
 </div>
 </body>
 <footer class="footer" style="position: absolute; bottom: 0">
