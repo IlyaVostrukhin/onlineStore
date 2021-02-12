@@ -19,11 +19,10 @@
     <tbody>
     <c:if test="${empty orders }">
         <tr>
-            <td colspan="7" class="text-center">У Вас еще нет заказов. Самое время создать первый!<br>
-                Для создания заказа добавьте товар в корзину и нажмите Создать заказ в корзине.</td>
+            <td colspan="7" class="text-center">Не найдено ни одного заказа.</td>
         </tr>
     </c:if>
-    <jsp:include page="../fragment/orders-tbody.jsp" />
+    <jsp:include page="../../fragment/orders-tbody.jsp" />
     </tbody>
 </table>
 <div class="text-center hidden-print">

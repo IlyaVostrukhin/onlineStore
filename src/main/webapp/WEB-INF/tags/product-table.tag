@@ -9,11 +9,12 @@
     <thead style="color: #FFFFFF; background-color: #595959">
     <tr>
         <th class="text-center" width="10%">Артикул</th>
-        <th class="text-center" width="20%">Наименование товара</th>
+        <th class="text-center" width="15%">Наименование товара</th>
+        <th class="text-center" width="20%">Описание товара</th>
         <th class="text-center" width="10%">Изображение</th>
-        <th class="text-center" width="20%">Количество</th>
-        <th class="text-center" width="20%">Цена</th>
-        <th class="text-center" width="20%">Сумма</th>
+        <th class="text-center" width="15%">Количество</th>
+        <th class="text-center" width="15%">Цена</th>
+        <th class="text-center" width="15%">Сумма</th>
         <c:if test="${showActionColumn }">
             <th class="hidden-print">Действие</th>
         </c:if>
@@ -24,6 +25,7 @@
         <tr id="product${item.product.id }" class="item">
             <td class="text-center">${item.product.id }</td>
             <td class="text-center">${item.product.name }</td>
+            <td class="text-center">${item.product.description }</td>
             <td class="text-center"><img style="max-width: 85%" src="${item.product.imageLink }" alt="${item.product.name }"></td>
             <td class="text-center" class="count">${item.count }</td>
             <td class="text-center" class="price">₽ ${item.price }</td>
@@ -44,7 +46,7 @@
         </tr>
     </c:forEach>
     <tr>
-        <td colspan="5" class="text-right"><strong>Итого:</strong></td>
+        <td colspan="6" class="text-right"><strong>Итого:</strong></td>
         <td colspan="${showActionColumn ? 2 : 1}" class="total">₽ ${totalCost}</td>
     </tr>
     </tbody>

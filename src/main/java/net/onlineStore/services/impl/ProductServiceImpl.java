@@ -10,6 +10,7 @@ import net.onlineStore.repositories.ProducerRepository;
 import net.onlineStore.repositories.ProductRepository;
 import net.onlineStore.services.ProductService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ class ProductServiceImpl implements ProductService {
 
     private final CategoryRepository categoryRepository;
 
+    @Autowired
     public ProductServiceImpl(ProductRepository productRepository, ProducerRepository producerRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.producerRepository = producerRepository;
@@ -58,6 +60,11 @@ class ProductServiceImpl implements ProductService {
         }
 
         return productRepository.findAllBySearchForm(searchForm.getQuery(), categories, producers, pageable);
+    }
+
+    @Override
+    public Page<Product> searchProductsByIdOrNameOrDescOrCategoryOrProducer(String query, Pageable pageable) {
+        return productRepository.searchProductsByIdOrNameOrDescOrCategoryOrProducer(query, pageable);
     }
 
     @Override

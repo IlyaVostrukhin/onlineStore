@@ -124,8 +124,7 @@ public class PublicDataController {
     @RequestMapping(value = "/ajax/json/product/add", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
     public String addProductToShoppingCart(
-            HttpServletRequest request,
-            Model model
+            HttpServletRequest request
     ) {
         ProductForm productForm = new ProductForm(
                 Long.parseLong(request.getParameter("idProduct")),

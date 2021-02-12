@@ -67,9 +67,10 @@ public class StoreWebApplicationInitializer implements WebApplicationInitializer
                 builder
                         .addDecoratorPath("/*", "/WEB-INF/JSP/page-template.jsp")
                         .addDecoratorPath("/admin*", "/WEB-INF/JSP/admin-template.jsp")
-                        .addDecoratorPath("/manager/ajax/*", "/WEB-INF/JSP/fragment-template.jsp")
+                        .addDecoratorPath("/manager*", "/WEB-INF/JSP/admin-template.jsp")
+                        .addDecoratorPath("/ajax/*", "/WEB-INF/JSP/fragment-template.jsp")
                         .addDecoratorPath("/admin/ajax/*", "/WEB-INF/JSP/fragment-template.jsp")
-                        .addDecoratorPath("/ajax/*", "/WEB-INF/JSP/fragment-template.jsp");
+                        .addDecoratorPath("/manager/ajax/*", "/WEB-INF/JSP/fragment-template.jsp");
             }
         };
     }

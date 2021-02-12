@@ -15,7 +15,4 @@ public final class Constants {
 
     //Макс количество продуктов на странице
     public static final int MAX_PRODUCTS_PER_HTML_PAGE = 12;
-
-    //Макс количество заказов на странице
-    public static final int MAX_ORDERS_PER_HTML_PAGE = 10;
 }

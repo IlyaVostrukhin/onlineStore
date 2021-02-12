@@ -2318,7 +2318,7 @@ th {
 .table-bordered > thead > tr > td {
   border-bottom-width: 2px;
 }
-.table-bordered > tbody > tr:hover {
+.select-row > tbody > tr:hover {
   background: #bdecc0;
 }
 .table-striped > tbody > tr:nth-of-type(odd) {

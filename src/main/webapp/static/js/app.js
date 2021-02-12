@@ -11,6 +11,7 @@
         $('#addToCart').click(addProductToCart);
         $('#addProductPopup .count').change(calculateCost);
         $('#loadMore').click(loadMoreProducts);
+        $('#loadMoreProductsFromManager').click(loadMoreProductsFromManager);
         $('#loadMoreMyOrders').click(loadMoreMyOrders);
         $('#loadMoreUsers').click(loadMoreUsers);
         initSearchForm();
@@ -70,7 +71,7 @@
             },
             error: function (xhr) {
                 convertLoaderToButton(btn, 'btn-primary', addProductToCart);
-                if (xhr.status = 400) {
+                if (xhr.status === 400) {
                     alert(xhr.responseJSON.message);
                 } else {
                     alert('Error');
@@ -150,6 +151,36 @@
             }
         });
     };
+
+    var loadMoreProductsFromManager = function () {
+        var btn = $('#loadMoreProductsFromManager');
+        convertButtonToLoader(btn, 'btn-success');
+        var pageNumber = parseInt($('#products').attr('data-page-number'));
+        var url = '/manager/ajax/html/more' + location.pathname.substring(8, location.pathname.length) + '?page=' + pageNumber + '&' + location.search.substring(1);
+        $.ajax({
+            url: url,
+            success: function (html) {
+                $('#products tbody').append(html);
+                pageNumber++;
+                var pageCount = parseInt($('#products').attr('data-page-count'));
+                $('#products').attr('data-page-number', pageNumber);
+                if (pageNumber < pageCount) {
+                    convertLoaderToButton(btn, 'btn-success', loadMoreProductsFromManager);
+                } else {
+                    btn.remove();
+                }
+            },
+            error: function (xhr) {
+                convertLoaderToButton(btn, 'btn-success', loadMoreProductsFromManager);
+                if (xhr.status == 401) {
+                    window.location.href = '/sign-in';
+                } else {
+                    alert('Error');
+                }
+            }
+        });
+    };
+
     var goSearch = function () {
         var isAllSelected = function (selector) {
             var unchecked = 0;
@@ -262,8 +293,7 @@
         var btn = $('#loadMoreUsers');
         convertButtonToLoader(btn, 'btn-success');
         var pageNumber = parseInt($('#users').attr('data-page-number'));
-        // var url = '/admin/ajax/html/more/users?page=' + pageNumber;
-        var url = '/admin/ajax/html/more' + location.pathname.substring(6,location.pathname.length) + '?page=' + pageNumber + '&' + location.search.substring(1);
+        var url = '/admin/ajax/html/more' + location.pathname.substring(6, location.pathname.length) + '?page=' + pageNumber + '&' + location.search.substring(1);
         $.ajax({
             url: url,
             success: function (html) {

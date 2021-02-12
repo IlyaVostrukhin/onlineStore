@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
 <div class="container">
     <div class="container">
@@ -16,7 +16,7 @@
     </div>
     <hr>
     <div class="container">
-        <table class="table table-bordered" width="100%"
+        <table class="table table-bordered select-row" width="100%"
                id="users" data-page-count="${page.totalPages}" data-page-number="1">
             <thead style="color: #FFFFFF; background-color: #595959">
             <th>Фамилия</th>

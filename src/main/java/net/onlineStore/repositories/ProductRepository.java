@@ -18,15 +18,28 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findAllByCategory(Category category, Pageable pageable);
 
-    @Query(value = "SELECT p.*, c.name as category, pr.name as producer FROM Product p, Category c, Producer pr " +
+    @Query(value = "select p.* FROM Product p\n" +
+            "INNER JOIN category c on p.id_category = c.id " +
+            "INNER JOIN producer pr on p.id_producer = pr.id " +
             "WHERE pr.id=p.id_producer and c.id=p.id_category and " +
-            "(p.name ILIKE CONCAT('%',:query,'%')" +
-            " or p.description ILIKE CONCAT('%',:query,'%')) " +
-            "and c.id IN :categories and pr.id IN :producers", nativeQuery = true)
+            "(p.name ILIKE CONCAT('%',:query,'%') or p.description ILIKE CONCAT('%',:query,'%')) and " +
+            "c.id IN :categories and pr.id IN :producers", nativeQuery = true)
     Page<Product> findAllBySearchForm(@Param("query") String queryParams,
                                       @Param("categories") List<Integer> categoryIds,
                                       @Param("producers") List<Integer> producerIds,
                                       Pageable pageable);
+
+    @Query(value = "SELECT pr.* FROM Product pr " +
+            "INNER JOIN category c on pr.id_category = c.id " +
+            "INNER JOIN producer p on pr.id_producer = p.id " +
+            "WHERE p.id=pr.id_producer and c.id=pr.id_category and " +
+            "    (CAST(pr.id as varchar) ILIKE CONCAT('%',:query,'%') or " +
+            "     pr.name ILIKE CONCAT('%',:query,'%') " +
+            "        or pr.description ILIKE CONCAT('%',:query,'%') " +
+            "        or c.name ILIKE CONCAT('%',:query,'%')) " +
+            "        or p.name ILIKE CONCAT('%',:query,'%') order by pr.id", nativeQuery = true)
+    Page<Product> searchProductsByIdOrNameOrDescOrCategoryOrProducer(@Param("query") String query,
+                                                                     Pageable pageable);
 
     Optional<Product> findById(Long id);
 

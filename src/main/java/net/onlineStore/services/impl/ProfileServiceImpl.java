@@ -7,6 +7,7 @@ import net.onlineStore.entities.Role;
 import net.onlineStore.model.CurrentProfile;
 import net.onlineStore.repositories.ProfileRepository;
 import net.onlineStore.services.ProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -26,6 +26,7 @@ public class ProfileServiceImpl implements ProfileService, UserDetailsService {
     private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public ProfileServiceImpl(ProfileRepository profileRepository, PasswordEncoder passwordEncoder) {
         this.profileRepository = profileRepository;
         this.passwordEncoder = passwordEncoder;

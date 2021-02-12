@@ -7,7 +7,7 @@
     <sec:authorize access="!isAuthenticated()">
         <div class="alert alert-warning hidden-print" role="alert">Для создания заказа, пожалуйста, авторизуйтесь</div>
     </sec:authorize>
-    <table class="table table-bordered">
+    <table class="table table-bordered select-row">
         <thead style="color: #FFFFFF; background-color: #595959">
         <tr>
             <th class="text-center" width="20%">Наименование товара</th>
@@ -22,7 +22,9 @@
         <c:forEach var="item" items="${currentShoppingCart.items}">
             <tr id="product${item.product.id}" class="item">
                 <td class="text-center">${item.product.name}</td>
-                <td class="text-center"><img style="max-width: 85%" src="${item.product.imageLink}"></td>
+                <td class="text-center">
+                    <img style="max-width: 85%" src="${item.product.imageLink}" alt="${item.product.name}">
+                </td>
                 <td class="text-center price">₽ ${item.product.price}</td>
                 <td class="text-center count">${item.count}</td>
                 <td class="text-center">₽ ${item.product.price * item.count}</td>

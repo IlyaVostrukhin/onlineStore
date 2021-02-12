@@ -17,6 +17,8 @@ public interface ProductService {
 
     Page<Product> findAllBySearchForm(SearchForm searchForm, Pageable pageable);
 
+    Page<Product> searchProductsByIdOrNameOrDescOrCategoryOrProducer(String query, Pageable pageable);
+
     List<Producer> findAllProducers();
 
     List<Category> findAllCategories();

@@ -3,6 +3,7 @@ package net.onlineStore.services.impl;
 import net.onlineStore.entities.Role;
 import net.onlineStore.repositories.RoleRepository;
 import net.onlineStore.services.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Set;
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 
+    @Autowired
     public RoleServiceImpl(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }

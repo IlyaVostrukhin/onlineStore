@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/my-profile", "/ajax/html/more/orders", "/orders", "/order").hasAuthority(Constants.USER)
-                .antMatchers("/manager").hasAuthority(Constants.MANAGER)
+                .antMatchers("/manager/**").hasAuthority(Constants.MANAGER)
                 .antMatchers("/admin/**").hasAuthority(Constants.ADMIN)
                 .anyRequest().permitAll();
         http.exceptionHandling().accessDeniedPage("/WEB-INF/JSP/page/access-denied.jsp");

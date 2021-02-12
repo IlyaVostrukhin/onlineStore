@@ -41,11 +41,7 @@ public class AdminController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String showAdminPanel(Model model) {
-        if (shoppingCart.getItems().isEmpty()) {
-            model.addAttribute("currentShoppingCart", null);
-        } else {
-            model.addAttribute("currentShoppingCart", shoppingCart);
-        }
+        updateShoppingCart(model);
         return "admin/admin";
     }
 
@@ -72,7 +68,7 @@ public class AdminController {
     @RequestMapping(value = "/search-users", method = RequestMethod.GET)
     public String searchUsers(@RequestParam String query,
                               Model model,
-                              @PageableDefault(size = 2)
+                              @PageableDefault()
                               @SortDefault(sort = "id") Pageable pageable) {
         Page<Profile> profiles = profileService.searchUsers(query, pageable);
         model.addAttribute("query", query);
@@ -85,7 +81,7 @@ public class AdminController {
     @RequestMapping(value = "/ajax/html/more/search-users", method = RequestMethod.GET)
     public String searchMoreUsers(@RequestParam String query,
                                   Model model,
-                                  @PageableDefault(size = 2)
+                                  @PageableDefault()
                                   @SortDefault(sort = "id") Pageable pageable) {
         Page<Profile> profiles = profileService.searchUsers(query, pageable);
         model.addAttribute("allUsers", profiles.getContent());
