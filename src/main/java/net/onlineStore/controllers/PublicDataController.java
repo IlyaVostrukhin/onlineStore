@@ -40,7 +40,7 @@ public class PublicDataController {
             @PageableDefault(size = Constants.MAX_PRODUCTS_PER_HTML_PAGE)
             @SortDefault(sort = "id") Pageable pageable
     ) {
-        Page<Product> products = productService.findAllProducts(pageable);
+        Page<Product> products = productService.findAllProductsByAmountGreaterThanZero(pageable);
         model.addAttribute("products", products.getContent());
         updateShoppingCart(model);
         model.addAttribute("page", products);
@@ -53,7 +53,7 @@ public class PublicDataController {
             @PageableDefault(size = Constants.MAX_PRODUCTS_PER_HTML_PAGE)
             @SortDefault(sort = "id") Pageable pageable
     ) {
-        Page<Product> products = productService.findAllProducts(pageable);
+        Page<Product> products = productService.findAllProductsByAmountGreaterThanZero(pageable);
         model.addAttribute("products", products.getContent());
         return "../fragment/product-list";
     }
@@ -66,7 +66,7 @@ public class PublicDataController {
             @SortDefault(sort = "id") Pageable pageable
     ) {
         Category category = categoryService.findCategoryByUrl("/" + categoryName);
-        Page<Product> products = productService.findAllByCategory(category, pageable);
+        Page<Product> products = productService.findAllByAmountGreaterThanAndCategory(category, pageable);
         model.addAttribute("products", products.getContent());
         updateShoppingCart(model);
         model.addAttribute("page", products);
@@ -82,7 +82,7 @@ public class PublicDataController {
             @SortDefault(sort = "id") Pageable pageable
     ) {
         Category category = categoryService.findCategoryByUrl("/" + categoryName);
-        Page<Product> products = productService.findAllByCategory(category, pageable);
+        Page<Product> products = productService.findAllByAmountGreaterThanAndCategory(category, pageable);
         model.addAttribute("products", products.getContent());
         return "../fragment/product-list";
     }
@@ -97,7 +97,7 @@ public class PublicDataController {
             @SortDefault(sort = "id") Pageable pageable
     ) {
         SearchForm searchForm = new SearchForm(query, category, producer);
-        Page<Product> products = productService.findAllBySearchForm(searchForm, pageable);
+        Page<Product> products = productService.findAllBySearchFormByAmountGreaterThanZero(searchForm, pageable);
         updateShoppingCart(model);
         model.addAttribute("products", products.getContent());
         model.addAttribute("page", products);
@@ -116,7 +116,7 @@ public class PublicDataController {
             @SortDefault(sort = "id") Pageable pageable
     ) {
         SearchForm searchForm = new SearchForm(query, category, producer);
-        Page<Product> products = productService.findAllBySearchForm(searchForm, pageable);
+        Page<Product> products = productService.findAllBySearchFormByAmountGreaterThanZero(searchForm, pageable);
         model.addAttribute("products", products.getContent());
         return "../fragment/product-list";
     }

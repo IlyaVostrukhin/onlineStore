@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 
-<div class="container" style="margin-bottom: 20px">
+<div class="container" style="width: 90%; margin-bottom: 20px">
     <h4 style="text-align: center">АРМ Менеджера. Работа с товаром.</h4>
     <hr>
     <form action="/manager/search-products" method="get">
@@ -20,17 +20,17 @@
         </div>
     </form>
     <hr>
-    <div class="container">
         <table class="table table-bordered select-row" width="100%"
                id="products" data-page-count="${page.totalPages}" data-page-number="1">
             <thead style="color: #FFFFFF; background-color: #595959">
             <th class="text-center" width="10%">Артикул</th>
             <th class="text-center" width="10%">Наименование</th>
-            <th class="text-center" width="25%">Описание</th>
+            <th class="text-center" width="15%">Описание</th>
             <th class="text-center" width="10%">Изображение</th>
             <th class="text-center" width="10%">Категория</th>
             <th class="text-center" width="10%">Производитель</th>
             <th class="text-center" width="10%">Цена</th>
+            <th class="text-center" width="10%">Остаток</th>
             <th class="text-center" width="15%">Действие</th>
             </thead>
             <tbody>
@@ -48,5 +48,4 @@
                 <a href="/manager" class="btn btn-primary">Вернуться назад</a>
             </div>
         </div>
-    </div>
 </div>

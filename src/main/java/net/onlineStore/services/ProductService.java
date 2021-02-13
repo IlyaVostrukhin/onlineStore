@@ -13,9 +13,11 @@ public interface ProductService {
 
     Page<Product> findAllProducts(Pageable pageable);
 
-    Page<Product> findAllByCategory(Category category, Pageable pageable);
+    Page<Product> findAllProductsByAmountGreaterThanZero(Pageable pageable);
 
-    Page<Product> findAllBySearchForm(SearchForm searchForm, Pageable pageable);
+    Page<Product> findAllByAmountGreaterThanAndCategory(Category category, Pageable pageable);
+
+    Page<Product> findAllBySearchFormByAmountGreaterThanZero(SearchForm searchForm, Pageable pageable);
 
     Page<Product> searchProductsByIdOrNameOrDescOrCategoryOrProducer(String query, Pageable pageable);
 

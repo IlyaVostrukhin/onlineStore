@@ -8,19 +8,21 @@
                 <h4 class="modal-title">Добавление товара в корзину</h4>
             </div>
             <div class="modal-body row">
+                <div class="col-xs-12"><h4 class="name text-center">Наименование</h4></div>
                 <div class="col-xs-12 col-sm-6">
                     <div class="thumbnail">
                         <img class="product-image" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Product image">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <h4 class="name text-center">Наименование</h4>
+<%--                    <h4 class="name text-center">Наименование</h4>--%>
                     <div class="list-group hidden-xs adv-chars">
                         <span class="list-group-item"> <small>Категория:</small> <span class="category">?</span></span>
                         <span class="list-group-item"> <small>Производитель:</small> <span class="producer">?</span></span>
                     </div>
-                    <div class="list-group">
+                    <div class="list-group" style="margin-top: -5px">
                         <span class="list-group-item"> <small>Цена:</small> <span class="price">0</span></span>
+                        <span class="list-group-item"> <small>Остаток:</small> <span class="amount">?</span></span>
                         <span class="list-group-item"> <small>Количество:</small> <input type="number" class="count" value="1" min="1" max="10"></span>
                         <span class="list-group-item"> <small>Итого:</small> <span class="cost">0</span></span>
                     </div>

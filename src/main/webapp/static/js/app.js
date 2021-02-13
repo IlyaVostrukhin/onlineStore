@@ -30,6 +30,7 @@
         $('#addProductPopup .name').text(product.find('.name').text());
         var price = product.find('.price').text();
         $('#addProductPopup .price').text(price);
+        $('#addProductPopup .amount').text(product.find('.amount').text());
         $('#addProductPopup .category').text(product.find('.category').text());
         $('#addProductPopup .producer').text(product.find('.producer').text());
         $('#addProductPopup .description').text(product.find('.description').text());
@@ -81,16 +82,16 @@
     };
     var calculateCost = function () {
         var priceStr = $('#addProductPopup .price').text();
-        var price = parseFloat(priceStr.replace('₽', ' '));
+        var price = parseFloat(priceStr.replace('₽', ' ')).toFixed(2);
         var count = parseInt($('#addProductPopup .count').val());
         var min = parseInt($('#addProductPopup .count').attr('min'));
-        var max = parseInt($('#addProductPopup .count').attr('max'));
+        var max = parseInt($('#addProductPopup').find('.amount').text().slice(0, -4));
         if (count >= min && count <= max) {
-            var cost = price * count;
+            var cost = (price * count).toFixed(2);
             $('#addProductPopup .cost').text('₽ ' + cost);
         } else {
-            $('#addProductPopup .count').val(1);
-            $('#addProductPopup .cost').text(priceStr);
+            $('#addProductPopup .count').val(max);
+            $('#addProductPopup .cost').text('₽ ' + (price * max).toFixed(2));
         }
     };
 

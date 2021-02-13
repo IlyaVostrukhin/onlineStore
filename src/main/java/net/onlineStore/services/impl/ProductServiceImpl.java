@@ -42,12 +42,17 @@ class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<Product> findAllByCategory(Category category, Pageable pageable) {
-        return productRepository.findAllByCategory(category, pageable);
+    public Page<Product> findAllProductsByAmountGreaterThanZero(Pageable pageable) {
+        return productRepository.findAllByAmountGreaterThan(0, pageable);
     }
 
     @Override
-    public Page<Product> findAllBySearchForm(SearchForm searchForm, Pageable pageable) {
+    public Page<Product> findAllByAmountGreaterThanAndCategory(Category category, Pageable pageable) {
+        return productRepository.findAllByAmountGreaterThanAndCategory(0, category, pageable);
+    }
+
+    @Override
+    public Page<Product> findAllBySearchFormByAmountGreaterThanZero(SearchForm searchForm, Pageable pageable) {
         List<Integer> producers = searchForm.getProducers();
         List<Integer> categories = searchForm.getCategories();
 
@@ -59,7 +64,7 @@ class ProductServiceImpl implements ProductService {
             categories = categoryRepository.findAll().stream().map(Category::getId).collect(Collectors.toList());
         }
 
-        return productRepository.findAllBySearchForm(searchForm.getQuery(), categories, producers, pageable);
+        return productRepository.findAllBySearchFormByAmountGreaterThanZero(searchForm.getQuery(), categories, producers, pageable);
     }
 
     @Override

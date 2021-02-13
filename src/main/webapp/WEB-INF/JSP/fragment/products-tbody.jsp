@@ -11,6 +11,7 @@
         <td class="text-center">${product.category.name}</td>
         <td class="text-center">${product.producer.name}</td>
         <td class="text-center">${product.price}</td>
+        <td class="text-center">${product.amount}</td>
             <%--        TODO: popup --%>
         <td class="text-center">
             <div class="btn-group" role="group">

@@ -25,12 +25,15 @@ public class Product extends AbstractEntity<Long> {
     private BigDecimal price;
 
     @OneToOne
-    @JoinColumn (name="id_category")
+    @JoinColumn(name = "id_category")
     private Category category;
 
     @OneToOne
-    @JoinColumn (name="id_producer")
+    @JoinColumn(name = "id_producer")
     private Producer producer;
+
+    @Column(nullable = false)
+    private Integer amount;
 
     @Override
     public Long getId() {
@@ -88,4 +91,8 @@ public class Product extends AbstractEntity<Long> {
     public void setProducer(Producer producer) {
         this.producer = producer;
     }
+
+    public Integer getAmount() { return amount; }
+
+    public void setAmount(Integer amount) { this.amount = amount; }
 }

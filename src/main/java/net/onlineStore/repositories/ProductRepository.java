@@ -14,17 +14,19 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    Page<Product> findAll(Pageable pageable);
 
-    Page<Product> findAllByCategory(Category category, Pageable pageable);
+    Page<Product> findAllByAmountGreaterThan(Integer minAmount, Pageable pageable);
+
+    Page<Product> findAllByAmountGreaterThanAndCategory(Integer minAmount, Category category, Pageable pageable);
 
     @Query(value = "select p.* FROM Product p\n" +
             "INNER JOIN category c on p.id_category = c.id " +
             "INNER JOIN producer pr on p.id_producer = pr.id " +
             "WHERE pr.id=p.id_producer and c.id=p.id_category and " +
             "(p.name ILIKE CONCAT('%',:query,'%') or p.description ILIKE CONCAT('%',:query,'%')) and " +
-            "c.id IN :categories and pr.id IN :producers", nativeQuery = true)
-    Page<Product> findAllBySearchForm(@Param("query") String queryParams,
+            "c.id IN :categories and pr.id IN :producers " +
+            "and p.amount > 0", nativeQuery = true)
+    Page<Product> findAllBySearchFormByAmountGreaterThanZero(@Param("query") String queryParams,
                                       @Param("categories") List<Integer> categoryIds,
                                       @Param("producers") List<Integer> producerIds,
                                       Pageable pageable);
