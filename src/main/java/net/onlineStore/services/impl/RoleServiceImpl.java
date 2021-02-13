@@ -1,5 +1,6 @@
 package net.onlineStore.services.impl;
 
+import net.onlineStore.Constants;
 import net.onlineStore.entities.Role;
 import net.onlineStore.repositories.RoleRepository;
 import net.onlineStore.services.RoleService;
@@ -24,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findById(Long id) {
-        return roleRepository.findById(id).orElse(new Role(1L, "ROLE_USER"));
+        return roleRepository.findById(id).orElse(new Role(1L, Constants.USER));
     }
 
     @Override

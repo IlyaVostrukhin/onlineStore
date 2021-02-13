@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 public interface OrderService {
     long makeOrder(ShoppingCart shoppingCart, CurrentProfile currentProfile, String recipient);
 
+    void cancelOrder(long id);
+
     Page<Order> findAllByProfileId(Long id, Pageable pageable);
 
     Order findById(Long id);

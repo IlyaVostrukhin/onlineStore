@@ -83,7 +83,7 @@ public class ShoppingCart implements Serializable {
         }
     }
 
-    private void refreshStatistics() {
+    public void refreshStatistics() {
         totalCount = 0;
         totalCost = BigDecimal.ZERO;
         for (ShoppingCartItem shoppingCartItem : getItems()) {

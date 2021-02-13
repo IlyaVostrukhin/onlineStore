@@ -25,12 +25,18 @@ public class Order extends AbstractEntity<Long> {
     @Column
     private String recipient;
 
+    @Column(name = "delivery_number")
+    private String deliveryNumber;
+
     @OneToOne
     @JoinColumn (name="id_order_status")
     private OrderStatus status;
 
     @Column
     private Timestamp created;
+
+    @Column
+    private Timestamp modify;
 
     @Override
     public Long getId() {
@@ -99,6 +105,22 @@ public class Order extends AbstractEntity<Long> {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public String getDeliveryNumber() {
+        return deliveryNumber;
+    }
+
+    public void setDeliveryNumber(String deliveryNumber) {
+        this.deliveryNumber = deliveryNumber;
+    }
+
+    public Timestamp getModify() {
+        return modify;
+    }
+
+    public void setModify(Timestamp modify) {
+        this.modify = modify;
     }
 
     @Override

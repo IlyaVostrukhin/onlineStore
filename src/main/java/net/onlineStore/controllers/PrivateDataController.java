@@ -63,6 +63,16 @@ public class PrivateDataController {
         return "redirect:/order?id=" + id;
     }
 
+    @RequestMapping(value = "/cancel-order", method = RequestMethod.GET)
+    public String cancelOrder(
+            @RequestParam Long id,
+            Model model
+    ) {
+        orderService.cancelOrder(id);
+        updateShoppingCart(model);
+        return "redirect:/orders";
+    }
+
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String getUserOrders(Model model,
                                 @PageableDefault()

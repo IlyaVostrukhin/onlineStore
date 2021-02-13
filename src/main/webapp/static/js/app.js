@@ -17,6 +17,7 @@
         initSearchForm();
         $('#goSearch').click(goSearch);
         $('.remove-product').click(removeProductFromCart);
+        $('.cancel-order').click(cancelProduct);
         $('.post-request').click(function () {
             postRequest($(this).attr('data-url'));
         });
@@ -64,7 +65,7 @@
             },
             success: function (data) {
                 $('#currentShoppingCart .total-count').text(data.totalCount);
-                $('#currentShoppingCart .total-cost').text(data.totalCost);
+                $('#currentShoppingCart .total-cost').text(data.totalCost.toFixed(2));
                 $('#currentShoppingCart').removeClass('hidden');
                 $('#currentShoppingCartSmall').removeClass('hidden');
                 convertLoaderToButton(btn, 'btn-primary', addProductToCart);
@@ -211,6 +212,12 @@
             executeRemoveProduct(btn);
         });
     };
+    var cancelProduct = function () {
+        var btn = $(this);
+        confirm('Вы действительно хотите отменить текущий заказ?', function () {
+            window.location.href = '/cancel-order?id=' + btn.attr('data-id-product');
+        });
+    }
     var refreshTotalCost = function () {
         var total = 0;
         $('#shoppingCart .item').each(function (index, value) {
@@ -219,7 +226,7 @@
             var val = price * count;
             total = total + val;
         });
-        $('#shoppingCart .total').text('₽ ' + total);
+        $('#shoppingCart .total').text('₽ ' + total.toFixed(2));
     };
     var executeRemoveProduct = function (btn) {
         var idProduct = btn.attr('data-id-product');
@@ -235,7 +242,7 @@
             },
             success: function (data) {
                 $('#currentShoppingCart .total-count').text(data.totalCount);
-                $('#currentShoppingCart .total-cost').text(data.totalCost);
+                $('#currentShoppingCart .total-cost').text(data.totalCost.toFixed(2));
                 if (data.totalCount == 0) {
                     window.location.href = '/products';
                 } else {

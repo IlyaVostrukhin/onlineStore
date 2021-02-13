@@ -7,26 +7,36 @@
     <sec:authorize access="!isAuthenticated()">
         <div class="alert alert-warning hidden-print" role="alert">Для создания заказа, пожалуйста, авторизуйтесь</div>
     </sec:authorize>
+    <c:if test="${!EDIT_COUNT_MESSAGE.isEmpty()}">
+        <div class="alert alert-danger hidden-print" role="alert">
+            Внимание! Количество некоторых товаров было снижено до складских остатков: <br/>
+            ${EDIT_COUNT_MESSAGE}
+        </div>
+    </c:if>
     <table class="table table-bordered select-row">
         <thead style="color: #FFFFFF; background-color: #595959">
         <tr>
+            <th class="text-center" width="10%">Артикул</th>
             <th class="text-center" width="20%">Наименование товара</th>
             <th class="text-center" width="15%">Изображение</th>
-            <th class="text-center" width="15%">Количество</th>
-            <th class="text-center" width="15%">Цена</th>
-            <th class="text-center" width="15%">Сумма</th>
-            <th class="hidden-print text-center" width="20%">Действия</th>
+            <th class="text-center" width="10%">Остаток товара</th>
+            <th class="text-center" width="10%">Количество</th>
+            <th class="text-center" width="10%">Цена</th>
+            <th class="text-center" width="10%">Сумма</th>
+            <th class="hidden-print text-center" width="15%">Действия</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="item" items="${currentShoppingCart.items}">
             <tr id="product${item.product.id}" class="item">
+                <td class="text-center">${item.product.id}</td>
                 <td class="text-center">${item.product.name}</td>
                 <td class="text-center">
                     <img style="max-width: 85%" src="${item.product.imageLink}" alt="${item.product.name}">
                 </td>
-                <td class="text-center price">₽ ${item.product.price}</td>
+                <td class="text-center">${item.product.amount}</td>
                 <td class="text-center count">${item.count}</td>
+                <td class="text-center price">₽ ${item.product.price}</td>
                 <td class="text-center">₽ ${item.product.price * item.count}</td>
                 <td class="text-center hidden-print">
                     <c:choose>
@@ -45,7 +55,7 @@
             </tr>
         </c:forEach>
         <tr>
-            <td colspan="4" class="text-right"><strong>Итого:</strong></td>
+            <td colspan="6" class="text-right"><strong>Итого:</strong></td>
             <td colspan="2" class="total">₽ ${currentShoppingCart.totalCost}</td>
         </tr>
         </tbody>

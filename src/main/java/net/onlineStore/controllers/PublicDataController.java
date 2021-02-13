@@ -168,10 +168,23 @@ public class PublicDataController {
     public String showShoppingCart(
             Model model
     ) {
+        StringBuilder message = new StringBuilder();
         updateShoppingCart(model);
         if (model.getAttribute("currentShoppingCart") == null) {
             return "redirect:/products";
         }
+        shoppingCart.getItems().forEach(i -> {
+            int amount = productService.findById(i.getProduct().getId()).getAmount();
+            if (amount < i.getCount()) {
+                message.append(i.getProduct().getName()).append(" (арт. ")
+                        .append(i.getProduct().getId()).append(") ")
+                        .append("- с ").append(i.getCount()).append(" до ")
+                        .append(amount).append(";<br/>");
+                i.setCount(amount);
+            }
+        });
+        model.addAttribute("EDIT_COUNT_MESSAGE", message.toString());
+        shoppingCart.refreshStatistics();
         return "shopping-cart";
     }
 
